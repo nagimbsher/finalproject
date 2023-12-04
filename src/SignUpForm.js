@@ -21,7 +21,7 @@ function SignUpForm() {
       } catch (error) {
           console.error('Registration failed:', error);
           
-          alert('Registration failed. Please try again.');
+          alert('An account with this Username already exists.');
       }
   };
 

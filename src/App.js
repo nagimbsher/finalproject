@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
 import Navbar from './Navbar';
 import MapComponent from './MapComponent';
-
 import RentalForm from './RentalForm';
 import RentalList from './RentalList';
-import SignUpForm from './SignUpForm';
-import LoginForm from './LoginForm'; 
+import AuthPage from './AuthPage';
 import Airbnb from './Airbnb';
+
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleLogin = (token) => {
-  
     setIsAuthenticated(true);
   };
 
   const handleLogout = () => {
-    
     setIsAuthenticated(false);
   };
 
   const handleRentalSubmit = () => {
-    
+    // Handle rental submission logic here
   };
 
   return (
@@ -29,16 +26,9 @@ function App() {
       <Navbar onLogout={handleLogout} />
       <Airbnb />
 
-      {!isAuthenticated && (
-        <>
-          <LoginForm onLogin={handleLogin} />
-          <SignUpForm />
-        </>
-      )}
-      <>
-    
-      </>
-      {isAuthenticated && (
+      {!isAuthenticated ? (
+        <AuthPage onLogin={handleLogin} />
+      ) : (
         <>
           <RentalForm onRentalSubmit={handleRentalSubmit} />
           <RentalList />
@@ -51,8 +41,4 @@ function App() {
 }
 
 export default App;
-
-
-
-
 

@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import './Airbnb.css';
 import ImageModal from './ImageModal';
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 function Airbnb() {
-    const [listings, setListings] = useState([]);
+  const [listings, setListings] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedImage, setSelectedImage] = useState(null);
   const [searchParams, setSearchParams] = useState({ city: '', state: '', country: '' });
   const [noMatch, setNoMatch] = useState(false);
-const apiUrl = process.env.REACT_APP_API_URL;
-
-
 
   useEffect(() => {
     fetch('https://myserver-9ut2.onrender.com/airbnb')
@@ -55,14 +52,13 @@ const apiUrl = process.env.REACT_APP_API_URL;
     setNoMatch(filteredListings.length === 0);
   };
 
-
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
   return (
     <div className="listing-container">
-      <h1>TravelStay</h1>
-      <form onSubmit={handleSearch} className="sticky-search-form">
+      
+      <form onSubmit={handleSearch} className="sticky-search-form airbnb-search-form">
         <input
           type="text"
           placeholder="City"
@@ -78,16 +74,20 @@ const apiUrl = process.env.REACT_APP_API_URL;
           placeholder="Country"
           onChange={(e) => setSearchParams({ ...searchParams, country: e.target.value })}
         />
-        <button type="submit">Search</button>
+        <button type="submit" className="airbnb-search-button">Search</button>
       </form>
-      {noMatch && <div>No matching listings</div>}
-      <ul>
+      {noMatch && <div className="airbnb-no-match">No matching listings</div>}
+      <ul className="airbnb-listings">
         {listings.map((listing) => (
-          <li key={listing.id} className="listing-item">
+          <li key={listing.id} className="listing-item airbnb-listing-item">
             <div className="listing-details">
-              <h2><Link to={"/apartment/"+listing.apartment}>Apartment: {listing.apartment}</Link></h2>
-              <p>Price: {listing.price}</p>
-              <p>Location: {listing.location}</p>
+              <h2 className="airbnb-listing-title">
+                <Link to={`/apartment/${listing.apartment}`} className="airbnb-listing-link">
+                  Apartment: {listing.apartment}
+                </Link>
+              </h2>
+              <p className="airbnb-listing-price">Price: {listing.price}</p>
+              <p className="airbnb-listing-location">Location: {listing.location}</p>
             </div>
             {listing.images && listing.images.map((image, index) => (
               <div key={index} className="image-hover-zoom">
@@ -95,7 +95,7 @@ const apiUrl = process.env.REACT_APP_API_URL;
                   src={image}
                   alt={`Listing ${listing.id} Image ${index}`}
                   onClick={() => handleImageClick(image)}
-                  style={{ cursor: 'pointer' }}
+                  className="airbnb-listing-image"
                 />
               </div>
             ))}
@@ -108,3 +108,4 @@ const apiUrl = process.env.REACT_APP_API_URL;
 }
 
 export default Airbnb;
+
