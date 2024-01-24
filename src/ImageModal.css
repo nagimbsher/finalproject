@@ -1,0 +1,20 @@
+.nav-button {
+    background-color: #333;
+    color: #fff; 
+    border: none;
+    border-radius: 50%; 
+    padding: 10px;
+    margin: 5px; 
+    cursor: pointer;
+    font-size: 18px; 
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-button:hover {
+    background-color: #555; 
+  }
+  
+  .nav-button span {
+    padding: 5px; 
+  }
+  

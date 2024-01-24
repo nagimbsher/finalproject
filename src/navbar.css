@@ -12,7 +12,7 @@
 
 /* Style the Navbar toggler icon */
 .navbar-toggler-icon {
-  background-color: #fff; /* Change to your desired toggler icon color */
+  background-color:yellow; /* Change to your desired toggler icon color */
 }
 
 /* Style the Navbar links */
@@ -68,3 +68,10 @@
     font-size: 1.2rem;
   }
    */
+   .truncate-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Adjust the max-width as needed */
+  }
+  
